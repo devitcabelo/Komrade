@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nome:</strong>
+  <%= @produto.nome %>
+</p>
+
+<p>
+  <strong>Descricao:</strong>
+  <%= @produto.descricao %>
+</p>
+
+<p>
+  <strong>Valor locacao:</strong>
+  <%= @produto.valor_locacao.format() %>
+</p>
+
+<p>
+  <strong>Nota:</strong>
+  <%= @produto.nota %>
+</p>
+
+<p>
+  <strong>Plataforma:</strong>
+  <%= @produto.plataforma %>
+</p>
+
+<p>
+  <strong>Genero:</strong>
+  <%= @produto.genero %>
+</p>
+
+<p>
+  <strong>Estudio:</strong>
+  <%= @produto.estudio %>
+</p>
+
+<p>
+  <strong>Idade recomendada:</strong>
+  <%= @produto.idade_recomendada %>
+</p>
+
+<p>
+  <strong>Data lancamento:</strong>
+  <%= @produto.data_lancamento_formatada %>
+</p>
+
+<p>
+  <strong>Resolucao maxima:</strong>
+  <%= @produto.resolucao_maxima %>
+</p>
+
+<p>
+  <strong>Tipo:</strong>
+  <%= @produto.tipo %>
+</p>
+
+<%= link_to 'Edit', edit_produto_path(@produto) %> |
+<%= link_to 'Back', produtos_path %>
