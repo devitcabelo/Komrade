@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Produto:</strong>
+  <%= @item.produto %>
+</p>
+
+<p>
+  <strong>Codigo:</strong>
+  <%= @item.codigo %>
+</p>
+
+<p>
+  <strong>Alugado:</strong>
+  <%= humanize_boolean(@item.alugado) %>
+</p>
+
+<%= link_to 'Edit', edit_item_path(@item) %> |
+<%= link_to 'Back', itens_path %>

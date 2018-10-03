@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Itens:</strong>
+  <%= @carrinho.itens %>
+</p>
+
+<p>
+  <strong>Total:</strong>
+  <%= @carrinho.total %>
+</p>
+
+<%= link_to 'Edit', edit_carrinho_path(@carrinho) %> |
+<%= link_to 'Back', carrinhos_path %>

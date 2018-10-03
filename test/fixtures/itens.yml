@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  produto: one
+  codigo: MyString
+  alugado: false
+
+two:
+  produto: two
+  codigo: MyString
+  alugado: false

@@ -9,9 +9,16 @@ class Produto < ApplicationRecord
   enumerize :genero, in: ["Ação", "Aventura", "Luta", "Plataforma", "Puzzle", "Corrida", "RPG", "FPS", "Simulador", "Esportes", "Estratégia", "Terror", "Misc"], predicates: true
   enumerize :tipo, in: ["Acessório", "Jogo", "Console"], predicates: true
   enumerize :resolucao_maxima, in: ["480i", "480p", "720p", "1080p", "4k"], predicates: false
+
+  #MAP
+  has_many :itens
   
   def data_lancamento_formatada
     I18n.l self.data_lancamento
+  end
+
+  def to_s
+    self.nome
   end
 
 end

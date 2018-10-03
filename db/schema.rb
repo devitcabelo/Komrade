@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_15_183741) do
+ActiveRecord::Schema.define(version: 2018_10_02_235342) do
+
+  create_table "carrinhos", force: :cascade do |t|
+    t.integer "itens_id"
+    t.integer "total_cents", default: 0, null: false
+    t.string "total_currency", default: "BRL", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["itens_id"], name: "index_carrinhos_on_itens_id"
+  end
+
+  create_table "itens", force: :cascade do |t|
+    t.integer "produto_id"
+    t.string "codigo"
+    t.boolean "alugado", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["produto_id"], name: "index_itens_on_produto_id"
+  end
 
   create_table "produtos", force: :cascade do |t|
     t.string "nome"
