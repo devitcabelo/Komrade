@@ -17,18 +17,27 @@
   </thead>
 
   <tbody>
-    <% @produtos.each do |produto| %>
+    <% if @produtos.nil? %>
       <tr class="center">
-        <td><%= produto.nome %></td>
-        <td><%= produto.valor_locacao.format %></td>
-        <td><%= produto.nota %></td>
-        <td><%= produto.genero %></td>
-        <td><%= produto.estudio %></td>
-        <td><%= produto.idade_recomendada %></td>
-        <td><%= link_to 'Show', produto %></td>
-        <td><%= link_to 'Edit', edit_produto_path(produto) %></td>
-        <td><%= link_to 'Destroy', produto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>Nenhum produto encontrado.</td>
       </tr>
+    <% else %>
+      <% @produtos.each do |produto| %>
+        <tr class="center">
+          <td><%=link_to produto.to_s, produto_path(produto) %></td>
+          <td><%= produto.valor_locacao.format %></td>
+          <td><%= produto.nota %></td>
+          <td><%= produto.genero %></td>
+          <td><%= produto.estudio %></td>
+          <td><%= produto.idade_recomendada %></td>
+          <td><%= link_to 'Alugar', produto_url(produto) %></td>
+          <% if can_control %>
+            <td><%= link_to 'Show', produto %></td>
+            <td><%= link_to 'Edit', edit_produto_path(produto) %></td>
+            <td><%= link_to 'Destroy', produto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

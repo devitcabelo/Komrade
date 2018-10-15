@@ -1,14 +1,41 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Itens:</strong>
-  <%= @carrinho.itens %>
+  <h2><strong>Carrinho:</strong></h2>
+  <div class="col-sm-8 text-center table-produto table-dark">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Quantidade</th>
+          <th>Dias</th>
+          <th>Total por produto</th>
+        </tr>
+      </thead>
+
+      <tbody>
+          <% if @carrinho.produtos_agrupados.empty? %>
+            <tr class="center">
+              <td>Nenhum produto no carrinho.</td>
+            </tr>
+          <% end %>
+        <% @carrinho.produtos_agrupados.each_with_index do |produto, index| %>
+          <tr class="center">
+            <td><%=link_to produto.to_s, produto_path(produto) %></td>
+            <td><%= @carrinho.quantidade_do(produto) %></td>
+            <td><%= @carrinho.datas_do(produto)%></td>
+            <td><%= (produto.valor_locacao * @carrinho.produtos_agrupados.count[index + 1]).format %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <td></td>
+          <td></td>
+          <td><strong>Total: </strong></td>
+          <td><%= @carrinho.total.format %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </p>
 
-<p>
-  <strong>Total:</strong>
-  <%= @carrinho.total %>
-</p>
-
-<%= link_to 'Edit', edit_carrinho_path(@carrinho) %> |
-<%= link_to 'Back', carrinhos_path %>
+<%= link_to 'Finalizar compra', edit_carrinho_path(@carrinho), type:"button", class: "btn btn-primary" %>

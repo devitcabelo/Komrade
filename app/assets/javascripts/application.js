@@ -16,6 +16,8 @@
 //= require jquery_ujs
 //= require rails-ujs
 //= require turbolinks
+//= require moment
+//= require daterangepicker
 //= require_tree .
 
 //= require maskmoney

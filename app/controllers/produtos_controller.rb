@@ -4,12 +4,17 @@ class ProdutosController < ApplicationController
   # GET /produtos
   # GET /produtos.json
   def index
-    @produtos = Produto.all
+    if params[:q].present?
+      @produtos = Produto.where(tipo: params[:q].singularize.capitalize)
+    else
+      @produtos = Produto.all
+    end
   end
 
   # GET /produtos/1
   # GET /produtos/1.json
   def show
+    @carrinho_produto = CarrinhoProduto.find_or_initialize_by(produto_id: @produto.id)
   end
 
   # GET /produtos/new

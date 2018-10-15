@@ -2,6 +2,9 @@ class Item < ApplicationRecord
   #MAP
   belongs_to :produto
 
+  has_many :item_pedidos
+  has_many :pedidos, through: :item_pedidos
+
   #VALIDATIONS
   validates :codigo, uniqueness: true
   validates :codigo, :produto, presence: true

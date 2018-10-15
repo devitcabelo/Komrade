@@ -13,7 +13,7 @@
     </div>
     <div class="col-xs-4">
       <ul class="nav navbar-nav navbar-right">
-        <%=fa_icon "shopping-cart", class:"text-secondary p-3 fa-2x"%>
+        <%= link_to (fa_icon "shopping-cart", class:"text-secondary m-3 fa-2x"), carrinho_path(current_cart)%>
         <% unless current_page?(new_usuario_session_path) || current_usuario.present? %>
           <li><%= link_to  "Logar", new_usuario_session_path, method: :create %></li>
         <% end %>

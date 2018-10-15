@@ -55,5 +55,36 @@
   <%= @produto.tipo %>
 </p>
 
-<%= link_to 'Edit', edit_produto_path(@produto) %> |
-<%= link_to 'Back', produtos_path %>
+<%= simple_form_for(@carrinho_produto) do |f| %>
+  <input type="text" name="carrinho_produto[data_aluguel_produto]" value="<%=@carrinho_produto.data_inicio_e_fim_form%>" autocomplete="off" class="daterange"/>
+  <p>
+  <button type="button" class="btn btn-danger" onClick="removerQuantidade()">-</button>
+  <input type="text" readonly="true" name="carrinho_produto[quantidade]" value="<%=@carrinho_produto.quantidade || 1%>" style="width: 30px; text-align: center;" class="quantidade" min="1">
+  <button type="button" class="btn btn-success" onClick="adicionarQuantidade()">+</button>
+  <p>
+  <input type="hidden" name="carrinho_produto[produto_id]" value="<%=@produto.id%>"/>
+  <%=f.submit (@carrinho_produto.new_record? ? 'Adicionar ao Carrinho' : 'Atualizar Carrinho')%>
+<% end %>
+
+<% if can_control %>
+  <%= link_to 'Edit', edit_produto_path(@produto) %> |
+  <%= link_to 'Back', produtos_path %>
+<% end %>
+
+<script>
+  $(document).ready(function(){
+    $('input[class="daterange"]').daterangepicker({
+      minDate: moment(),
+      locale: { format: 'DD/MM/YYYY' }
+    });
+  })
+    function adicionarQuantidade(){
+      quantidade = $('.quantidade')
+      quantidade.val(parseInt(quantidade.val()) + 1)
+    }
+    function removerQuantidade(){
+      quantidade = $('.quantidade')
+      if(quantidade.val() > 1)
+        quantidade.val(parseInt(quantidade.val()) - 1)
+    }
+</script>
