@@ -1,0 +1,23 @@
+<% @pedido.itens_agrupados.each_with_index do |item, index| %>
+  <tr class="center">
+    <td><%= link_to item.to_s, item_path(item) %></td>
+    <td><%= @pedido.itens_agrupados.count[index +1] %></td>
+    <td><%= @pedido.datas_do(item)%></td>
+    <td><%= (item.valor_locacao * @carrinho.items_agrupados.count[index + 1]).format %></td>
+  </tr>
+<% end %>
+
+<%= simple_form_for(@pedido) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :forma_pagamento %>
+    <%= f.association :itens, as: :hidden %>
+    <%= f.input :total, as: :hidden %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

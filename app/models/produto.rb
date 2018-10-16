@@ -17,6 +17,10 @@ class Produto < ApplicationRecord
     I18n.l self.data_lancamento
   end
 
+  def itens_disponiveis quantidade
+    self.itens.nao_alugados.limit(quantidade)
+  end
+
   def to_s
     self.nome
   end

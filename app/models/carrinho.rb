@@ -32,4 +32,16 @@ class Carrinho < ApplicationRecord
   def calcula_total
     self.total = self.carrinho_produto.inject(0){|value, cp| (cp.produto.valor_locacao * cp.quantidade) + value}
   end
+
+  def itens_dos_produtos
+    result = nil
+    self.carrinho_produto.each do |carrinho_produto|
+      if result.nil?
+        result = carrinho_produto.produto.itens_disponiveis( carrinho_produto.quantidade )
+      else
+        result += carrinho_produto.produto.itens_disponiveis( carrinho_produto.quantidade )  
+      end
+    end
+    result
+  end
 end

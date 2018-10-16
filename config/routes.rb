@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
+  resources :perfis, only: [:show, :new, :create, :edit, :update, :destroy]
   resources :carrinhos, only: [:show, :edit, :destroy]
   resources :itens
   resources :produtos
   resources :carrinho_produtos
+  resources :pedidos
 
   get '/adicionar-no-carrinho/:produto_id', to: "carrinhos#adicionar_produto", as: :adicionar_produto
 

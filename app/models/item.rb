@@ -9,6 +9,9 @@ class Item < ApplicationRecord
   validates :codigo, uniqueness: true
   validates :codigo, :produto, presence: true
 
+  #SCOPES
+  scope :nao_alugados, -> { where(alugado: false) }
+
   #DELEGATES
   delegate :nome, to: :produto, prefix: true
 

@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+<p>
+  <strong>Nome:</strong>
+  <%= @perfil.nome %>
+</p>
+
+<p>
+  <strong>Sobrenome:</strong>
+  <%= @perfil.sobrenome %>
+</p>
+
+<p>
+  <strong>Cpf:</strong>
+  <%= @perfil.cpf %>
+</p>
+
+<p>
+  <strong>Celular:</strong>
+  <%= @perfil.celular %>
+</p>
+
+<p>
+  <strong>Data nascimento:</strong>
+  <%= @perfil.data_nascimento %>
+</p>
+
+<%= link_to 'Edit', edit_perfil_path(@perfil) %> |
+<%= link_to 'Back', root_path %>

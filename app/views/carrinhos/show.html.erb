@@ -38,4 +38,4 @@
   </div>
 </p>
 
-<%= link_to 'Finalizar compra', edit_carrinho_path(@carrinho), type:"button", class: "btn btn-primary" %>
+<%= link_to 'Finalizar compra', new_pedido_path, type:"button", class: "btn btn-primary" unless @carrinho.produtos_agrupados.empty?  %>
