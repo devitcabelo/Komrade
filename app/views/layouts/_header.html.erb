@@ -13,7 +13,12 @@
     </div>
     <div class="col-xs-4">
       <ul class="nav navbar-nav navbar-right">
-        <%= link_to (fa_icon "shopping-cart", class:"text-secondary m-3 fa-2x"), carrinho_path(current_cart)%>
+        <%= link_to (fa_icon "shopping-cart", class:"text-secondary m-3 fa-2x cart hover-change-color"), carrinho_show_path%>
+        <div href="/carrinho" class="container-icon-cart">
+          <div href="/carrinho" class="itens-cart hover-change-color">
+            <span href="/carrinho" class="number-itens-cart pointer"><%= current_cart.produtos.count %></span>
+          </div>
+        </div>
         <% unless current_page?(new_usuario_session_path) || current_usuario.present? %>
           <li><%= link_to  "Logar", new_usuario_session_path, method: :create %></li>
         <% end %>

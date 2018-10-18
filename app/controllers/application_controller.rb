@@ -1,11 +1,19 @@
 class ApplicationController < ActionController::Base
   #before_action :authenticate_usuario!
   protect_from_forgery with: :exception
-  helper_method :current_cart, :can_control
+  helper_method :current_cart, :can_control, :perfil, :esvaziar_carrinho
   before_action :logado_sem_cadastro, unless: :devise_controller?
 
   def can_control
     current_usuario.admin?
+  end
+
+  def perfil
+    current_usuario.perfil
+  end
+
+  def esvaziar_carrinho
+    session[:carrinho_id] = nil
   end
 
   def current_cart

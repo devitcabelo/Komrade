@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :enderecos
   resources :perfis, only: [:show, :new, :create, :edit, :update, :destroy]
   resources :carrinhos, only: [:show, :edit, :destroy]
   resources :itens

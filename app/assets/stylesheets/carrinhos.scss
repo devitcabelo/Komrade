@@ -10,3 +10,32 @@
     color: #fff !important;
   }
 }
+
+.container-icon-cart {
+  padding-top: 25px;
+  margin-left: -20px;
+}
+
+.itens-cart{
+  color: pink;
+  border: 2px solid blue;
+  background-color: #6c757d;
+  height: 25px;
+  border-radius: 50%;
+  width: 25px;
+  text-align: center;
+  
+}
+
+.hover-change-color:hover{
+  &.cart{
+    color: #fff
+  }
+  &.itens-cart{
+    background-color: #fff; 
+  }
+}
+
+.number-itens-cart{
+  text-align: center;
+}

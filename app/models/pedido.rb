@@ -5,6 +5,7 @@ class Pedido < ApplicationRecord
   # MAPS
   has_many :item_pedidos
   has_many :itens, through: :item_pedidos
+  belongs_to :endereco
 
   # VALIDATES
   validates_presence_of :forma_pagamento
@@ -15,7 +16,7 @@ class Pedido < ApplicationRecord
   enumerize :forma_pagamento, in: ["Dinheiro"], predicates: false
 
   def datas_do item
-    self.item_pedidos.find_by(produto_id: item.produto_id).data_inicio_e_fim_form
+    self.item_pedidos.find_by(item_id: item.id).data_inicio_e_fim_form
   end
 
   def self.gera_pedido_do_carrinho carrinho
@@ -39,7 +40,6 @@ class Pedido < ApplicationRecord
   end
 
   def itens_agrupados
-    byebug
     itens.group_by(&:produto_id)
   end
 

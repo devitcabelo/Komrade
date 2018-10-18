@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <h2><strong>Pedido: <%=@pedido.id%></strong></h2>
+  <div class="col-sm-8 text-center table-item table-dark">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Quantidade</th>
+          <th>Dias</th>
+          <th>Total por item</th>
+        </tr>
+      </thead>
+
+      <tbody>
+          <% if @pedido.itens_agrupados.empty? %>
+            <tr class="center">
+              <td>Nenhum produto no pedido.</td>
+            </tr>
+          <% end %>
+        <% @pedido.itens_agrupados.each_with_index do |item, index| %>
+          <tr class="center">
+            <td><%= item[1].first.produto_nome %></td>
+            <td><%= item[0] %></td>
+            <td><%= @pedido.datas_do(item[1].first) %></td>
+            <td><%= (item[1].first.produto.valor_locacao * item[0]).format %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <td></td>
+          <td></td>
+          <td><strong>Total: </strong></td>
+          <td><%= @pedido.total.format %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</p>

@@ -1,0 +1,48 @@
+
+<%= simple_form_for(@endereco) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :cep %>
+    <%= f.input :estado, readonly: true %>
+    <%= f.input :cidade, readonly: true %>
+    <%= f.input :bairro, readonly: true %>
+    <%= f.input :logradouro, readonly: true %>
+    <%= f.input :complemento %>
+    <%= f.input :numero %>
+    <%= f.input :responsavel %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+
+<script>
+  $(document).ready(function() {
+
+    function getCEP(e){
+      
+      if( !(e.type == "keypress") || e.which == 13 ){
+        cep = $(this);
+        if(cep){
+          $.get("https://viacep.com.br/ws/" + $(this).val() + "/json/", function(response){
+            $('#endereco_estado').val(response.uf);
+            $('#endereco_cidade').val(response.localidade);
+            $('#endereco_bairro').val(response.bairro);
+            $('#endereco_logradouro').val(response.logradouro);
+          })
+        }
+      }
+
+      if((e.type == "keypress") && e.which == 13 ) return false;
+    }
+
+    $('#endereco_cep').blur(getCEP);
+    $('#endereco_cep').keypress(getCEP);
+    $('#endereco_form').keypress(function(e){
+      if(e.which == 13) debugger
+    })
+  })
+</script>

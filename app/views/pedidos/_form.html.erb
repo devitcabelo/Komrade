@@ -1,20 +1,39 @@
-<% @pedido.itens_agrupados.each_with_index do |item, index| %>
-  <tr class="center">
-    <td><%= link_to item.to_s, item_path(item) %></td>
-    <td><%= @pedido.itens_agrupados.count[index +1] %></td>
-    <td><%= @pedido.datas_do(item)%></td>
-    <td><%= (item.valor_locacao * @carrinho.items_agrupados.count[index + 1]).format %></td>
-  </tr>
-<% end %>
+<div class="col-sm-8 text-center table-produto table-dark">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Quantidade</th>
+          <th>Dias</th>
+          <th>Total por produto</th>
+        </tr>
+      </thead>
 
+      <tbody>
+      <% @carrinho.produtos_agrupados.each_with_index do |produto, index| %>
+        <tr class="center">
+          <td><%=link_to produto.to_s, produto_path(produto) %></td>
+          <td><%= @carrinho.quantidade_do(produto) %></td>
+          <td><%= @carrinho.datas_do(produto)%></td>
+          <td><%= (produto.valor_locacao * @carrinho.produtos_agrupados.count[index + 1]).format %></td>
+        </tr>
+      <% end %>
+      <tr>
+        <td></td>
+        <td></td>
+        <td><strong>Total: </strong></td>
+        <td><%= @carrinho.total.format %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 <%= simple_form_for(@pedido) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="form-inputs">
     <%= f.input :forma_pagamento %>
-    <%= f.association :itens, as: :hidden %>
-    <%= f.input :total, as: :hidden %>
+    <%= f.association :endereco, collection: @enderecos %>
   </div>
 
   <div class="form-actions">
