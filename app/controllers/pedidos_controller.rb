@@ -1,6 +1,10 @@
 class PedidosController < ApplicationController
   before_action :set_pedido, only: [:show, :edit, :update, :destroy]
 
+  def index
+    @pedidos = perfil.pedidos
+  end
+
   def new
     @pedido = Pedido.gera_pedido_do_carrinho(current_cart)
     @carrinho = current_cart
@@ -16,10 +20,14 @@ class PedidosController < ApplicationController
     @pedido = Pedido.new(pedido_params)
     @pedido.itens = current_cart.itens_dos_produtos
     @pedido.total = current_cart.total
+    @pedido.perfil_id = perfil.id
+    byebug
     if @pedido.save
       esvaziar_carrinho
       redirect_to pedido_path(@pedido)
     else
+      @carrinho = current_cart
+      @enderecos = perfil.enderecos
       render :edit
     end
   end

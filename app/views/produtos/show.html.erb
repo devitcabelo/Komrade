@@ -80,7 +80,8 @@
   })
     function adicionarQuantidade(){
       quantidade = $('.quantidade')
-      quantidade.val(parseInt(quantidade.val()) + 1)
+      if(quantidade.val() < <%=@produto.itens.nao_alugados.count%>)
+        quantidade.val(parseInt(quantidade.val()) + 1)
     }
     function removerQuantidade(){
       quantidade = $('.quantidade')

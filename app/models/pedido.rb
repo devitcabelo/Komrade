@@ -3,7 +3,7 @@ class Pedido < ApplicationRecord
   extend Enumerize
 
   # MAPS
-  has_many :item_pedidos
+  has_many :item_pedidos, dependent: :delete_all
   has_many :itens, through: :item_pedidos
   belongs_to :endereco
 
@@ -14,6 +14,8 @@ class Pedido < ApplicationRecord
 
   # ENUM
   enumerize :forma_pagamento, in: ["Dinheiro"], predicates: false
+
+  after_save :aluga_itens
 
   def datas_do item
     self.item_pedidos.find_by(item_id: item.id).data_inicio_e_fim_form
@@ -41,6 +43,25 @@ class Pedido < ApplicationRecord
 
   def itens_agrupados
     itens.group_by(&:produto_id)
+  end
+
+  def aluga_itens
+    Item.transaction do
+      self.itens.each do |item|
+        item.alugado = true
+        item.save
+      end
+    end
+  end
+
+  def to_s
+    primeiro_produto = itens_agrupados[1][0]
+    segundo_produto = itens_agrupados[2][0]
+    if segundo_produto.present?
+      return id.to_s + ": " + primeiro_produto.produto_nome + ", " + segundo_produto.produto_nome + (itens_agrupados[3].present? ? "..." : "")
+    else
+      return id.to_s + ": " + primeiro_produto.produto_nome
+    end
   end
 
 end

@@ -22,7 +22,7 @@
         <% @pedido.itens_agrupados.each_with_index do |item, index| %>
           <tr class="center">
             <td><%= item[1].first.produto_nome %></td>
-            <td><%= item[0] %></td>
+            <td><%= item[1].count %></td>
             <td><%= @pedido.datas_do(item[1].first) %></td>
             <td><%= (item[1].first.produto.valor_locacao * item[0]).format %></td>
           </tr>
