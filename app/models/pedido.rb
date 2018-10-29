@@ -55,10 +55,10 @@ class Pedido < ApplicationRecord
   end
 
   def to_s
-    primeiro_produto = itens_agrupados[1][0]
-    segundo_produto = itens_agrupados[2][0]
+    primeiro_produto = self.itens_agrupados[1][0]
+    segundo_produto = self.itens_agrupados[2][0]
     if segundo_produto.present?
-      return id.to_s + ": " + primeiro_produto.produto_nome + ", " + segundo_produto.produto_nome + (itens_agrupados[3].present? ? "..." : "")
+      return id.to_s + ": " + primeiro_produto.produto_nome + ", " + segundo_produto.produto_nome + (self.itens_agrupados[3].present? ? "..." : "")
     else
       return id.to_s + ": " + primeiro_produto.produto_nome
     end

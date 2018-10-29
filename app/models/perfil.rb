@@ -4,4 +4,8 @@ class Perfil < ApplicationRecord
   has_many :pedidos
 
   validates_presence_of :nome, :sobrenome, :cpf, :celular, :data_nascimento, :usuario, :tipo
+
+  def to_s
+    [nome, sobrenome].join(' ')
+  end
 end

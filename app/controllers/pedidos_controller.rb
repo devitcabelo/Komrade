@@ -21,7 +21,6 @@ class PedidosController < ApplicationController
     @pedido.itens = current_cart.itens_dos_produtos
     @pedido.total = current_cart.total
     @pedido.perfil_id = perfil.id
-    byebug
     if @pedido.save
       esvaziar_carrinho
       redirect_to pedido_path(@pedido)

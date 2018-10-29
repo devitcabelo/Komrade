@@ -15,7 +15,7 @@
           <td><%=link_to produto.to_s, produto_path(produto) %></td>
           <td><%= @carrinho.quantidade_do(produto) %></td>
           <td><%= @carrinho.datas_do(produto)%></td>
-          <td><%= (produto.valor_locacao * @carrinho.produtos_agrupados.count[index + 1]).format %></td>
+          <td><%= (produto.valor_locacao * @carrinho.produtos_agrupados.count[produto.id]).format %></td>
         </tr>
       <% end %>
       <tr>
