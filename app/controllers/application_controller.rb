@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_cart, :can_control, :perfil, :esvaziar_carrinho, :back_uri
   before_action :logado_sem_cadastro, unless: :devise_controller?
 
+  add_flash_types :danger, :info, :warning, :success
+
   def can_control
     current_usuario.admin?
   end
@@ -34,7 +36,7 @@ class ApplicationController < ActionController::Base
 
   def logado_sem_cadastro
     if current_usuario.present? && current_usuario.perfil.nil?
-      flash[:notice] = "Você precisa finalizar seu cadastro para continuar a navegar." 
+      flash[:warning] = "Você precisa finalizar seu cadastro para continuar a navegar." 
       redirect_to new_usuario_session_url 
     end
   end

@@ -7,13 +7,13 @@ class CarrinhosController < ApplicationController
 
   def adicionar_produto
     current_cart.adicionar_produto(params[:produto_id])
-    flash[:notice] = "Adicionado com sucesso!"
+    flash[:warning] = "Adicionado com sucesso!"
     redirect_to request.referrer
   end
 
   def remover_produto
     current_cart.remover_produto(params[:produto_id])
-    flash[:notice] = "Removido com sucesso!"
+    flash[:warning] = "Removido com sucesso!"
     redirect_to request.referrer
   end
 end

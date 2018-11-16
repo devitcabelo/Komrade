@@ -10,7 +10,7 @@ class PedidosController < ApplicationController
     @carrinho = current_cart
     @enderecos = perfil.enderecos
     if @enderecos.empty?
-      flash[:notice] = "Opa! Antes de finalizar seu pedido você precisa cadastrar um endereço para entrega."
+      flash[:warning] = "Opa! Antes de finalizar seu pedido você precisa cadastrar um endereço para entrega."
       session[:go_back_to_url] = new_pedido_path
       redirect_to new_endereco_path
     end

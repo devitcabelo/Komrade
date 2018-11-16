@@ -27,9 +27,9 @@
         <tr class="center">
           <td>
             <% unless produto.favorito_do(perfil) %>
-              <%= button_to 'Adicionar aos favoritos', favoritos_path(:'favorito[perfil_id]'=> perfil, :'favorito[produto_id]'=> produto)%>
+              <%= button_to 'Adicionar aos favoritos', favoritos_path(:'favoritos[perfil_id]'=> perfil, :'favoritos[produto_id]'=> produto)%>
             <% else %>
-              <%= button_to 'Remover aos favoritos', favoritos_path(:'favorito[perfil_id]'=> perfil, :'favorito[produto_id]'=> produto), action: :destroy%>
+              <%= button_to 'Remover dos favoritos', favorito_path( (perfil.favoritos.find_by(produto_id:  produto.id)) ), method: :delete%>
             <% end %>
 
           </td>
@@ -44,7 +44,7 @@
             <% unless produto.na_lista_de_desejos_do(perfil) %>
               <%= button_to 'Adicionar a lista de desejos', lista_desejos_path(:'lista_desejo[perfil_id]'=> perfil, :'lista_desejo[produto_id]'=> produto)%>
             <% else %>
-              <%= button_to 'Remover a lista de desejos', lista_desejos_path(:'lista_desejo[perfil_id]'=> perfil, :'lista_desejo[produto_id]'=> produto), action: :destroy%>
+              <%= button_to 'Remover a lista de desejos', lista_desejo_path(perfil.lista_desejos.find_by(produto_id:  produto.id)), method: :delete%>
             <% end %>
           </td>
 

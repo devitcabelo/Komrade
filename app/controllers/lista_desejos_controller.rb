@@ -1,4 +1,6 @@
 class ListaDesejosController < ApplicationController
+  before_action :set_lista_desejo, only: [:destroy]
+
   def index
     @lista_desejos = self.perfil.lista_desejos
   end
@@ -10,7 +12,7 @@ class ListaDesejosController < ApplicationController
 
     respond_to do |format|
       if @lista_desejo.save
-        format.html { redirect_to back_uri, notice: 'Adicionado a lista de desejos.' }
+        format.html { redirect_to back_uri, warning: 'Adicionado a lista de desejos.' }
         format.json { render :show, status: :created, location: @lista_desejo }
       else
         format.html { render :new }
@@ -24,7 +26,7 @@ class ListaDesejosController < ApplicationController
   def destroy
     @lista_desejo.destroy
     respond_to do |format|
-      format.html { redirect_to back_uri, notice: 'Removido da lista de desejos.' }
+      format.html { redirect_to back_uri, warning: 'Removido da lista de desejos.' }
       format.json { head :no_content }
     end
   end

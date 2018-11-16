@@ -30,7 +30,7 @@ class PerfisController < ApplicationController
 
     respond_to do |format|
       if @perfil.save
-        format.html { redirect_to @perfil, notice: 'Perfil was successfully created.' }
+        format.html { redirect_to @perfil, warning: 'Perfil was successfully created.' }
         format.json { render :show, status: :created, location: @perfil }
       else
         format.html { render :new }
@@ -44,7 +44,7 @@ class PerfisController < ApplicationController
   def update
     respond_to do |format|
       if @perfil.update(perfil_params)
-        format.html { redirect_to @perfil, notice: 'Perfil was successfully updated.' }
+        format.html { redirect_to @perfil, warning: 'Perfil was successfully updated.' }
         format.json { render :show, status: :ok, location: @perfil }
       else
         format.html { render :edit }
@@ -58,7 +58,7 @@ class PerfisController < ApplicationController
   def destroy
     @perfil.destroy
     respond_to do |format|
-      format.html { redirect_to perfis_url, notice: 'Perfil was successfully destroyed.' }
+      format.html { redirect_to perfis_url, warning: 'Perfil was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

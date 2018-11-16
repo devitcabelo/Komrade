@@ -14,7 +14,7 @@ class FavoritosController < ApplicationController
 
     respond_to do |format|
       if @favorito.save
-        format.html { redirect_to @favorito, notice: 'Favorito was successfully created.' }
+        format.html { redirect_to back_uri, warning: 'Favorito adicionado com sucesso.' }
         format.json { render :show, status: :created, location: @favorito }
       else
         format.html { render :new }
@@ -28,7 +28,7 @@ class FavoritosController < ApplicationController
   def destroy
     @favorito.destroy
     respond_to do |format|
-      format.html { redirect_to favoritos_url, notice: 'Favorito was successfully destroyed.' }
+      format.html { redirect_to back_uri, warning: 'Favorito removido com sucesso.' }
       format.json { head :no_content }
     end
   end
@@ -41,6 +41,6 @@ class FavoritosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def favorito_params
-      params.require(:lista_desejo).permit(:produto_id, :perfil_id)
+      params.require(:favoritos).permit(:produto_id, :perfil_id)
     end
 end

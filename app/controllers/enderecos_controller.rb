@@ -30,7 +30,7 @@ class EnderecosController < ApplicationController
     respond_to do |format|
       if @endereco.save
         redirect_to session[:go_back_to_url] and return if session[:go_back_to_url]
-        format.html { redirect_to @endereco, notice: 'Endereco was successfully created.' }
+        format.html { redirect_to @endereco, warning: 'Endereco was successfully created.' }
         format.json { render :show, status: :created, location: @endereco }
       else
         format.html { render :new }
@@ -44,7 +44,7 @@ class EnderecosController < ApplicationController
   def update
     respond_to do |format|
       if @endereco.update(endereco_params)
-        format.html { redirect_to @endereco, notice: 'Endereco was successfully updated.' }
+        format.html { redirect_to @endereco, warning: 'Endereco was successfully updated.' }
         format.json { render :show, status: :ok, location: @endereco }
       else
         format.html { render :edit }
@@ -58,7 +58,7 @@ class EnderecosController < ApplicationController
   def destroy
     @endereco.destroy
     respond_to do |format|
-      format.html { redirect_to enderecos_url, notice: 'Endereco was successfully destroyed.' }
+      format.html { redirect_to enderecos_url, warning: 'Endereco was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

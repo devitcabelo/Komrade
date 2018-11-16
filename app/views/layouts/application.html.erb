@@ -12,7 +12,12 @@
 
   <body>
     <%= render 'layouts/header'%>
-    <div class="p-5">
+    <% flash.each do |name, msg|%>
+      <div class='alert alert-<%= name%>'>
+        <%= msg %>
+      </div>
+    <% end %>
+    <div class="content-page">
       <%= yield %>
     </div>
   </body>
