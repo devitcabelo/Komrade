@@ -7,11 +7,11 @@ class ApplicationController < ActionController::Base
   add_flash_types :danger, :info, :warning, :success
 
   def can_control
-    current_usuario.admin?
+    current_usuario.admin? if current_usuario.present?
   end
 
   def perfil
-    current_usuario.perfil
+    current_usuario.perfil if current_usuario.present?
   end
 
   def esvaziar_carrinho

@@ -1,25 +1,25 @@
-<div class="col-sm-8 text-center table-produto table-dark">
-<table class="table">
-  <thead>
-    <tr>
-      <th>Código</th>
-      <th>Pedido</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% if @pedidos.nil? %>
-      <tr class="center">
-        <td>Nenhum pedido encontrado.</td>
+<div class="col-sm-11 text-center table-produto table-dark m-5">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Pedido</th>
       </tr>
-    <% else %>
-      <% @pedidos.each do |pedido| %>
+    </thead>
+
+    <tbody>
+      <% if @pedidos.nil? %>
         <tr class="center">
-          <td><%=link_to pedido.id, pedido_path(pedido) %></td>
-          <td><%=link_to pedido.to_s, pedido_path(pedido) %></td>
+          <td>Nenhum pedido encontrado.</td>
         </tr>
+      <% else %>
+        <% @pedidos.each do |pedido| %>
+          <tr class="center">
+            <td><%=link_to pedido.id, pedido_path(pedido) %></td>
+            <td><%=link_to pedido.to_s, pedido_path(pedido) %></td>
+          </tr>
+        <% end %>
       <% end %>
-    <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
 </div>

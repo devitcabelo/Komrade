@@ -36,7 +36,9 @@ class Produto < ApplicationRecord
   def ordem_na_recomendacao perfil
     return (perfil.recomendacao.recomendacoes[self.genero] || 0 ) * -1
   end
+
   def self.ordem_recomendacoes perfil, produtos
     produtos.sort_by{|p| p.ordem_na_recomendacao(perfil)}
   end
+
 end

@@ -5,11 +5,12 @@ class ProdutosController < ApplicationController
   # GET /produtos.json
   def index
     if params[:q].present?
-      @produtos = Produto.where(tipo: params[:q].singularize.capitalize)
+      @q = Produto.ransack(params[:q])
+      @produtos = @q.result(distinct: true)
     else
       @produtos = Produto.all
     end
-    @produtos = Produto.ordem_recomendacoes(perfil, @produtos)
+    @produtos = Produto.ordem_recomendacoes(perfil, @produtos) if perfil.present?
   end
 
   # GET /produtos/1
@@ -34,7 +35,7 @@ class ProdutosController < ApplicationController
 
     respond_to do |format|
       if @produto.save
-        format.html { redirect_to @produto, warning: 'Produto was successfully created.' }
+        format.html { redirect_to @produto, warning: 'Produto criado com sucesso.' }
         format.json { render :show, status: :created, location: @produto }
       else
         format.html { render :new }
@@ -48,7 +49,7 @@ class ProdutosController < ApplicationController
   def update
     respond_to do |format|
       if @produto.update(produto_params)
-        format.html { redirect_to @produto, warning: 'Produto was successfully updated.' }
+        format.html { redirect_to @produto, warning: 'Produto alterado com sucesso.' }
         format.json { render :show, status: :ok, location: @produto }
       else
         format.html { render :edit }

@@ -2,7 +2,7 @@
 
 <h1>Produtos</h1>
 
-<div class="col-sm-8 text-center table-produto table-dark">
+<div class="col-sm-12 text-center table-produto table-dark">
 <table class="table">
   <thead>
     <tr>
@@ -24,36 +24,7 @@
       </tr>
     <% else %>
       <% @produtos.each do |produto| %>
-        <tr class="center">
-          <td>
-            <% unless produto.favorito_do(perfil) %>
-              <%= button_to 'Adicionar aos favoritos', favoritos_path(:'favoritos[perfil_id]'=> perfil, :'favoritos[produto_id]'=> produto)%>
-            <% else %>
-              <%= button_to 'Remover dos favoritos', favorito_path( (perfil.favoritos.find_by(produto_id:  produto.id)) ), method: :delete%>
-            <% end %>
-
-          </td>
-          <td><%=link_to produto.to_s, produto_path(produto) %></td>
-          <td><%= produto.valor_locacao.format %></td>
-          <td><%= produto.nota %></td>
-          <td><%= produto.genero %></td>
-          <td><%= produto.estudio %></td>
-          <td><%= produto.idade_recomendada %></td>
-          <td><%= link_to 'Alugar', produto_url(produto) %></td>
-          <td>
-            <% unless produto.na_lista_de_desejos_do(perfil) %>
-              <%= button_to 'Adicionar a lista de desejos', lista_desejos_path(:'lista_desejo[perfil_id]'=> perfil, :'lista_desejo[produto_id]'=> produto)%>
-            <% else %>
-              <%= button_to 'Remover a lista de desejos', lista_desejo_path(perfil.lista_desejos.find_by(produto_id:  produto.id)), method: :delete%>
-            <% end %>
-          </td>
-
-          <% if can_control %>
-            <td><%= link_to 'Show', produto %></td>
-            <td><%= link_to 'Edit', edit_produto_path(produto) %></td>
-            <td><%= link_to 'Destroy', produto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          <% end %>
-        </tr>
+        <%= render  "shared/produto-item", produto: produto%>
       <% end %>
     <% end %>
   </tbody>
@@ -61,4 +32,4 @@
 </div>
 <br>
 
-<%= link_to 'New Produto', new_produto_path if current_usuario.admin? %>
+<%= link_to 'New Produto', new_produto_path if current_usuario.present? && current_usuario.admin? %>

@@ -1,20 +1,31 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <div class="container">
-    <div class="col-xs-4">
+  <div class="container m-0" style="max-width: initial;">
+    <div class="col-xs-2">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="navbar-toggler-icon"></span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item"><%= button_to "Jogos", produtos_path, params: {:'q[tipo_eq]' => :"Jogo"}, class: "btn btn-primary", method: :get %></a>
+          <a class="dropdown-item"><%= button_to "Video Games", produtos_path, params: {:'q[tipo_eq]' => :"Console"}, class: "btn btn-primary", method: :get %></a>
+          <a class="dropdown-item" ><%= button_to "Acessórios", produtos_path, params: {:'q[tipo_eq]' => :"Acessório"}, class: "btn btn-primary", method: :get %></a>
+        </div>
+      </div>
+    <div class="col-xs-2">
       <%= link_to "KomRade Games", root_path, id: "logo" %>
     </div>
     <div class="col-xs-4">
-      <ul class="nav navbar-nav navbar-center mr-auto">
-        <li class="p-3 nav-item active"><%= link_to "Home", produtos_path() %></li>
-        <li class="p-3 nav-item"><%= link_to "Jogos", produtos_path(q: :jogos) %></li>
-        <li class="p-3 nav-item"><%= link_to "Video Games", produtos_path(q: :video_games) %></li>
-        <li class="p-3 nav-item"><%= link_to "Acessórios", produtos_path(q: :acessorios) %></li>
-      </ul>
+      <form class="form-inline my-2 my-lg-0" action="/produtos">
+        <input class="form-control mr-sm-2" type="search" name="q[nome_cont]"placeholder="Buscar" aria-label="Buscar">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+      </form>
     </div>
     <div class="col-xs-4">
       <ul class="nav navbar-nav navbar-right">
         <%if current_usuario.present?%>
-          <div style="padding-top: 17px;"><a href="/pedidos">Meus Pedidos</div>
+          <% if perfil.present? %>
+            <div  style="padding-top: 15px;padding-right: 17px"><%= button_to "Meu perfil", perfil_path(perfil), class: "btn btn-primary", method: :get %></div>
+          <% end %>
+          <div  style="padding-top: 15px;"><%= button_to "Meus pedidos", pedidos_path, class: "btn btn-primary", method: :get %></div>
           <%= link_to (fa_icon "shopping-cart", class:"text-secondary m-3 fa-2x cart hover-change-color"), carrinho_show_path%>
           <div href="/carrinho" class="container-icon-cart">
             <div href="/carrinho" class="itens-cart hover-change-color">
@@ -23,11 +34,11 @@
           </div>
         <%end%>
         <% unless current_page?(new_usuario_session_path) || current_usuario.present? %>
-          <li><%= link_to  "Logar", new_usuario_session_path, method: :create %></li>
+          <li><%= button_to  "Logar", new_usuario_session_path, method: :create, class: "btn btn-primary" %></li>
         <% end %>
         <% if current_usuario.present? %>
           <div class="p-3">
-            <li><%= link_to  "Sair", destroy_usuario_session_path, method: :delete %></li>
+            <li><%= button_to  "Sair", destroy_usuario_session_path, method: :delete, class: "btn btn-primary" %></li>
           </div>
         <% end %>
       </ul>

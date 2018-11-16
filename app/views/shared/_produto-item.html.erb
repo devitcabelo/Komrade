@@ -1,0 +1,33 @@
+<tr class="center">
+  <td>
+    <% if current_usuario.present? %>
+      <% unless produto.favorito_do(perfil) %>
+        <%= button_to 'Adicionar aos favoritos', favoritos_path(:'favoritos[perfil_id]'=> perfil, :'favoritos[produto_id]'=> produto), class: "btn btn-primary"%>
+      <% else %>
+        <%= button_to 'Remover dos favoritos', favorito_path( (perfil.favoritos.find_by(produto_id:  produto.id)) ), method: :delete, class: "btn btn-primary"%>
+      <% end %>
+    <% end %>
+  </td>
+  <td><%=link_to produto.to_s, produto_path(produto) %></td>
+  <td><%= produto.valor_locacao.format %></td>
+  <td><%= produto.nota %></td>
+  <td><%= produto.genero %></td>
+  <td><%= produto.estudio %></td>
+  <td><%= produto.idade_recomendada %></td>
+  <% if current_usuario.present? %>
+    <td><%= button_to 'Alugar', produto_url(produto), method: :get, class: "btn btn-primary" %></td>
+    <td>
+      <% unless produto.na_lista_de_desejos_do(perfil) %>
+        <%= button_to 'Adicionar a lista de desejos', lista_desejos_path(:'lista_desejo[perfil_id]'=> perfil, :'lista_desejo[produto_id]'=> produto), class: "btn btn-primary"%>
+      <% else %>
+        <%= button_to 'Remover a lista de desejos', lista_desejo_path(perfil.lista_desejos.find_by(produto_id:  produto.id)), method: :delete, class: "btn btn-primary"%>
+      <% end %>
+    <% end %>      
+  </td>
+
+  <% if can_control %>
+    <td><%= link_to 'Ver', produto %></td>
+    <td><%= link_to 'Editar', edit_produto_path(produto) %></td>
+    <td><%= link_to 'Deletar', produto, method: :delete, data: { confirm: 'Te?' } %></td>
+  <% end %>
+</tr>

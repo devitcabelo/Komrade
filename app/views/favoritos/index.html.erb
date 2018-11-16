@@ -2,7 +2,7 @@
 
 <h1>Favoritos</h1>
 
-<div class="col-sm-8 text-center table-produto table-dark">
+<div class="col-sm-12 text-center table-produto table-dark">
 <table class="table">
   <thead>
     <tr>
@@ -23,26 +23,8 @@
         <td>Nenhum produto encontrado.</td>
       </tr>
     <% else %>
-      <% @favoritos.each do |favorito| %>
-        <tr class="center">
-          <td>
-            <%= favorito.produto.favorito_do(perfil) ? "Favorito" : "Não favorito" %>
-          </td>
-          <td><%=link_to favorito.produto.to_s, produto_path(favorito.produto) %></td>
-          <td><%= favorito.produto.valor_locacao.format %></td>
-          <td><%= favorito.produto.nota %></td>
-          <td><%= favorito.produto.genero %></td>
-          <td><%= favorito.produto.estudio %></td>
-          <td><%= favorito.produto.idade_recomendada %></td>
-          <td><%= link_to 'Alugar', produto_url(favorito.produto) %></td>
-          <td><%= link_to 'Adicionar a lista de favoritos', produto_url(favorito.produto) %></td>
-
-          <% if can_control %>
-            <td><%= link_to 'Show', favorito.produto %></td>
-            <td><%= link_to 'Edit', edit_produto_path(favorito.produto) %></td>
-            <td><%= link_to 'Destroy', favorito.produto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          <% end %>
-        </tr>
+      <% @favoritos.each do |favorito| %>        
+        <%= render  "shared/produto-item", produto: favorito.produto%>
       <% end %>
     <% end %>
   </tbody>

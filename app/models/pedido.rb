@@ -57,7 +57,7 @@ class Pedido < ApplicationRecord
   def to_s
     keys = self.itens_agrupados.keys
     primeiro_produto = self.itens_agrupados[keys[0]][0]
-    segundo_produto = self.itens_agrupados[keys[1]][0]
+    segundo_produto = self.itens_agrupados[keys[1]][0] if keys[1].present?
     if segundo_produto.present?
       return primeiro_produto.produto_nome + ", " + segundo_produto.produto_nome + (self.itens_agrupados[3].present? ? "..." : "")
     else

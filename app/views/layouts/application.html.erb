@@ -13,7 +13,7 @@
   <body>
     <%= render 'layouts/header'%>
     <% flash.each do |name, msg|%>
-      <div class='alert alert-<%= name%>'>
+      <div class='alert alert-<%= bootstrap_flash(name)%>'>
         <%= msg %>
       </div>
     <% end %>
