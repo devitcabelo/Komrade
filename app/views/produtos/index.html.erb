@@ -6,7 +6,7 @@
 <table class="table">
   <thead>
     <tr>
-      <th></th>
+      <th ></th>
       <th>Nome</th>
       <th>Valor locacao</th>
       <th>Nota</th>
@@ -26,7 +26,12 @@
       <% @produtos.each do |produto| %>
         <tr class="center">
           <td>
-            <%= produto.favorito_do(perfil) ? "Favorito" : "Não favorito" %>
+            <% unless produto.favorito_do(perfil) %>
+              <%= button_to 'Adicionar aos favoritos', favoritos_path(:'favorito[perfil_id]'=> perfil, :'favorito[produto_id]'=> produto)%>
+            <% else %>
+              <%= button_to 'Remover aos favoritos', favoritos_path(:'favorito[perfil_id]'=> perfil, :'favorito[produto_id]'=> produto), action: :destroy%>
+            <% end %>
+
           </td>
           <td><%=link_to produto.to_s, produto_path(produto) %></td>
           <td><%= produto.valor_locacao.format %></td>
@@ -35,7 +40,13 @@
           <td><%= produto.estudio %></td>
           <td><%= produto.idade_recomendada %></td>
           <td><%= link_to 'Alugar', produto_url(produto) %></td>
-          <td><%= link_to 'Adicionar a lista de desejos', produto_url(produto) %></td>
+          <td>
+            <% unless produto.na_lista_de_desejos_do(perfil) %>
+              <%= button_to 'Adicionar a lista de desejos', lista_desejos_path(:'lista_desejo[perfil_id]'=> perfil, :'lista_desejo[produto_id]'=> produto)%>
+            <% else %>
+              <%= button_to 'Remover a lista de desejos', lista_desejos_path(:'lista_desejo[perfil_id]'=> perfil, :'lista_desejo[produto_id]'=> produto), action: :destroy%>
+            <% end %>
+          </td>
 
           <% if can_control %>
             <td><%= link_to 'Show', produto %></td>
@@ -50,4 +61,4 @@
 </div>
 <br>
 
-<%= link_to 'New Produto', new_produto_path %>
+<%= link_to 'New Produto', new_produto_path if current_usuario.admin? %>

@@ -9,6 +9,7 @@ class ProdutosController < ApplicationController
     else
       @produtos = Produto.all
     end
+    @produtos = Produto.ordem_recomendacoes(perfil, @produtos)
   end
 
   # GET /produtos/1

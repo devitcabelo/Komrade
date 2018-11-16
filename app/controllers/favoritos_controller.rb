@@ -41,6 +41,6 @@ class FavoritosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def favorito_params
-      params.fetch(:favorito, {})
+      params.require(:lista_desejo).permit(:produto_id, :perfil_id)
     end
 end

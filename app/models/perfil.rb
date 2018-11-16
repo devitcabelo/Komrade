@@ -3,8 +3,11 @@ class Perfil < ApplicationRecord
   has_many :enderecos
   has_many :pedidos
   has_many :favoritos
+  has_many :produtos_favoritos, through: :favoritos, source: :produto
   has_many :lista_desejos
-
+  has_many :produtos_lista_desejos, through: :lista_desejos, source: :produto
+  has_one :recomendacao
+  
   validates_presence_of :nome, :sobrenome, :cpf, :celular, :data_nascimento, :usuario, :tipo
 
   def to_s
@@ -25,5 +28,16 @@ class Perfil < ApplicationRecord
     else
       self.lista_desejos.find_by(produto_id: produto.id).destroy
     end
+  end
+
+  def calcula_recomendacoes
+    genero_total_f = self.produtos_favoritos.group(:genero).count
+    genero_total_f.each { |k, v| genero_total_f[k] = v * 2 } #Um favorito soma 2 pontos
+
+    genero_total_ld = self.produtos_lista_desejos.group(:genero).count
+    
+    genero_total = genero_total_f.merge(genero_total_ld){|k, a_value, b_value| a_value + b_value}
+    
+    Recomendacao.find_or_create_by(perfil_id: self.id).update_attributes(recomendacoes: genero_total)
   end
 end

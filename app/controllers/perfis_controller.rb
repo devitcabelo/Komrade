@@ -27,7 +27,6 @@ class PerfisController < ApplicationController
   # POST /perfis.json
   def create
     @perfil = Perfil.new(perfil_params)
-    debugger
 
     respond_to do |format|
       if @perfil.save

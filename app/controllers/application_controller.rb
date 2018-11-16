@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   #before_action :authenticate_usuario!
   protect_from_forgery with: :exception
-  helper_method :current_cart, :can_control, :perfil, :esvaziar_carrinho
+  helper_method :current_cart, :can_control, :perfil, :esvaziar_carrinho, :back_uri
   before_action :logado_sem_cadastro, unless: :devise_controller?
 
   def can_control
@@ -24,6 +24,10 @@ class ApplicationController < ActionController::Base
       session[:carrinho_id] = carrinho.id
       carrinho
     end
+  end
+
+  def back_uri
+    request.env['HTTP_REFERER']
   end
    
   protected
