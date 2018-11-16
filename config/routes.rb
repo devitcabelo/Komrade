@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :produtos
   resources :carrinho_produtos
   resources :pedidos
+  resources :favoritos, only: [:index, :create, :destroy]
+  resources :lista_desejos, only: [:index]
 
   get '/adicionar-no-carrinho/:produto_id', to: "carrinhos#adicionar_produto", as: :adicionar_produto
 

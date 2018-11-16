@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Favoritos</h1>
+
+<div class="col-sm-8 text-center table-produto table-dark">
+<table class="table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Nome</th>
+      <th>Valor locacao</th>
+      <th>Nota</th>
+      <th>Genero</th>
+      <th>Estudio</th>
+      <th>Classificação Indicativa</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if @favoritos.nil? %>
+      <tr class="center">
+        <td>Nenhum produto encontrado.</td>
+      </tr>
+    <% else %>
+      <% @favoritos.each do |favorito| %>
+        <tr class="center">
+          <td>
+            <%= favorito.produto.favorito_do(perfil) ? "Favorito" : "Não favorito" %>
+          </td>
+          <td><%=link_to favorito.produto.to_s, produto_path(favorito.produto) %></td>
+          <td><%= favorito.produto.valor_locacao.format %></td>
+          <td><%= favorito.produto.nota %></td>
+          <td><%= favorito.produto.genero %></td>
+          <td><%= favorito.produto.estudio %></td>
+          <td><%= favorito.produto.idade_recomendada %></td>
+          <td><%= link_to 'Alugar', produto_url(favorito.produto) %></td>
+          <td><%= link_to 'Adicionar a lista de favoritos', produto_url(favorito.produto) %></td>
+
+          <% if can_control %>
+            <td><%= link_to 'Show', favorito.produto %></td>
+            <td><%= link_to 'Edit', edit_produto_path(favorito.produto) %></td>
+            <td><%= link_to 'Destroy', favorito.produto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<br>
+
+<%= link_to 'New Produto', new_produto_path %>

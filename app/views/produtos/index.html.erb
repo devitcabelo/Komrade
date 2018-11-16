@@ -6,6 +6,7 @@
 <table class="table">
   <thead>
     <tr>
+      <th></th>
       <th>Nome</th>
       <th>Valor locacao</th>
       <th>Nota</th>
@@ -24,6 +25,9 @@
     <% else %>
       <% @produtos.each do |produto| %>
         <tr class="center">
+          <td>
+            <%= produto.favorito_do(perfil) ? "Favorito" : "Não favorito" %>
+          </td>
           <td><%=link_to produto.to_s, produto_path(produto) %></td>
           <td><%= produto.valor_locacao.format %></td>
           <td><%= produto.nota %></td>
@@ -31,6 +35,8 @@
           <td><%= produto.estudio %></td>
           <td><%= produto.idade_recomendada %></td>
           <td><%= link_to 'Alugar', produto_url(produto) %></td>
+          <td><%= link_to 'Adicionar a lista de desejos', produto_url(produto) %></td>
+
           <% if can_control %>
             <td><%= link_to 'Show', produto %></td>
             <td><%= link_to 'Edit', edit_produto_path(produto) %></td>

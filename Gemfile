@@ -17,11 +17,15 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'mini_racer', platforms: :ruby
 
 gem "font-awesome-rails"
+gem 'font-awesome-sass', '~> 5.5.0'
 
 gem 'bootstrap-datepicker-rails'
 
 gem 'momentjs-rails'
 gem 'bootstrap-daterangepicker-rails'
+
+#AASM Acts As State Machine
+gem 'aasm', '~> 4.12'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'

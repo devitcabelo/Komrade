@@ -25,4 +25,8 @@ class Produto < ApplicationRecord
     self.nome
   end
 
+  def favorito_do perfil
+    perfil.favoritos.map(&:produto_id).include?(self.id)
+  end
+
 end
