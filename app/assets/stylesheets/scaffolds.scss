@@ -6,3 +6,23 @@
   padding: 3rem;
   padding-top: 0 !important;
 }
+
+#logo img {
+  height: 60px;
+  margin-top: 10px;
+}
+
+.dropdown-menu.show {
+  background-color: #343a40 !important;
+  margin-top: -11px;
+  margin-left: -3px;
+}
+
+a.dropdown-item:hover{
+  background-color: #545e67 !important;
+}
+
+body {
+  background-color: #545e67 !important;
+  font-family: fantasy !important;
+}

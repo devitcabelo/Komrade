@@ -34,7 +34,10 @@ class Produto < ApplicationRecord
   end
 
   def ordem_na_recomendacao perfil
-    return (perfil.recomendacao.recomendacoes[self.genero] || 0 ) * -1
+    if self.genero.present?
+      return (perfil.recomendacao.recomendacoes[self.genero] || 0 ) * -1
+    end
+    return 0
   end
 
   def self.ordem_recomendacoes perfil, produtos
